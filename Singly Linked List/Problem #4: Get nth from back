@@ -1,0 +1,107 @@
+#include <iostream>
+#include <algorithm>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct Node{
+    int data {};
+    Node* next {};
+
+    Node (int data): data(data){
+    }
+};
+
+class LinkedList{
+
+private:
+    Node* head {};
+    Node* tail {};
+    int length = 0;
+
+public:
+        LinkedList(){}
+
+        void print(){
+
+        for(Node* cur = head; cur; cur = cur->next){
+            cout << cur->data<< " ";
+        }cout << endl;
+
+        }
+
+        void insert_end(int val){
+
+         Node* item = new Node(val);
+
+        if(head ==  nullptr){
+            head = tail = item;
+            length ++;
+        }
+        else {
+            tail->next = item;
+            tail = item;
+            length ++;
+        }
+    }
+
+        void delete_end(){
+            cout << "Delete end Function"<<endl;
+        }
+        void insert_front(int val){
+            cout << "Insert Front Function"<<endl;
+
+        }
+        void delete_front(){
+            cout << "Delete front function"<<endl;
+        }
+
+        Node* Get_nth(int idx){
+
+            int cnt = 0 ;
+            for (Node* cur = head; cur ; cur = cur->next){
+                if(++cnt == idx)
+                    return cur;
+            }
+            return nullptr;
+
+        }
+
+        Node* Get_nth_from_back(int idx){
+
+            if(length < idx)
+                return nullptr;
+
+            return Get_nth(length - idx + 1);
+        }
+
+};
+
+int main()
+{
+    cout << "Hello world!" << endl;
+
+    LinkedList list;
+
+    cout << "insert end Function"<<endl;
+    list.insert_end(10);
+    list.insert_end(20);
+    list.insert_end(30);
+    list.insert_end(40);
+
+    cout << "Print Function"<<endl;
+    list.print();
+
+    cout << "Get IDX 1 from Back"<<endl;
+    cout << list.Get_nth_from_back(1)->data<<endl;
+
+    cout << "Get IDX 3 from Back"<<endl;
+    cout << list.Get_nth_from_back(3)->data<<endl;
+
+
+
+
+
+
+    return 0;
+}
