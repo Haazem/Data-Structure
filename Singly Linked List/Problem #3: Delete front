@@ -1,0 +1,136 @@
+#include <iostream>
+#include <algorithm>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct Node{
+    int data {};
+    Node* next {};
+
+    Node(int data): data(data){}
+};
+
+class LinkedList{
+
+private:
+    Node* head {};
+    Node* tail {};
+    int length = 0;
+
+public:
+
+    void insert_end(int val){
+
+        Node* node = new Node(val);
+
+        if (!head)
+            head = tail = node;
+        else {
+            tail->next = node;
+            tail = node;
+        }
+
+    }
+
+    void print(){
+
+        for(Node* cur = head; cur != NULL; cur = cur ->next){
+            cout << cur->data << " ";
+        }cout << endl;
+    }
+
+    void delete_front(){
+
+        if(head == nullptr)
+            return ;
+
+        else if(head->next == nullptr){
+            delete head;
+            head = tail = nullptr;
+            length = 0 ;
+        }
+        else{
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+            length --;
+        }
+
+    }
+
+    void delete_end(){
+
+        if(head == nullptr)
+        {
+
+            return;
+        }
+        else if (head->next == nullptr)
+        {
+
+            delete head;
+            head = tail = nullptr;
+            length --;
+        }
+        else {
+            Node* cur = head;
+            while(cur->next != tail){
+                cur = cur->next;
+            }
+            delete tail;
+            tail = cur;
+            tail->next = nullptr;
+            length --;
+        }
+    }
+
+
+};
+
+
+int main()
+{
+    cout << "Hello world!" << endl;
+
+    LinkedList list;
+
+    cout << "Insert End Function"<<endl;
+    list.insert_end(10);
+    list.insert_end(20);
+    list.insert_end(30);
+
+    cout << "Print LinkedList"<<endl;
+    list.print();
+
+    cout << "Delete End Function"<<endl;
+    list.delete_end();
+    cout << "Print LinkedList"<<endl;
+    list.print();
+
+    cout << "Delete Front"<<endl;
+    list.delete_front();
+    cout << "Print LinkedList"<<endl;
+    list.print();
+
+    cout << "Delete Front"<<endl;
+    list.delete_front();
+    cout << "Print LinkedList"<<endl;
+    list.print();
+
+
+    /*
+    cout << "Delete End Function"<<endl;
+    list.delete_end();
+    cout << "Print LinkedList"<<endl;
+    list.print();
+
+    cout << "Delete End Function"<<endl;
+    list.delete_end();
+    cout << "Print LinkedList"<<endl;
+    list.print();
+    */
+
+
+    return 0;
+}
