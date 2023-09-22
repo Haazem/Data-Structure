@@ -1,0 +1,78 @@
+#include <iostream>
+#include <algorithm>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct Node{
+    int data {};
+    Node* next {};
+
+    Node(int data): data(data){}
+
+    ~Node() {
+		//To easily test your nodes are destructed
+		cout << "Destroy value: " << data << "\n";
+	}
+
+};
+
+class LinkedList{
+private:
+    Node* head {};
+    Node* tail {};
+    int length = 0;
+
+public:
+
+    void print(){
+
+        for(Node* cur = head; cur; cur = cur->next){
+            cout << cur->data << " ";
+        }cout << endl;
+    }
+
+    void insert_end(int value){
+
+        Node* item = new Node(value);
+        if(!head)
+            head = tail = item;
+
+        else
+            tail->next = item, tail = item;
+
+        length ++;
+    }
+
+    ~LinkedList(){
+
+        while(head){
+            Node* cur = head->next;
+            delete head;
+            head = cur;
+
+        }
+
+    }
+
+};
+
+
+int main()
+{
+
+
+    LinkedList list;
+    list.insert_end(1);
+    list.insert_end(2);
+    list.insert_end(3);
+
+    list.print();
+
+
+
+
+
+
+    return 0;
+}
